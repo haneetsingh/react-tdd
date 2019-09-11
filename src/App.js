@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import RestaurantListPage from './RestaurantListPage';
 
 export default class App extends Component {
-  state = { name: 'there' }
   render() {
-    return (<div className="hello">Hello, {this.state.name}</div>);
+    return <RestaurantListPage />;
   }
 }
