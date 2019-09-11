@@ -3,7 +3,10 @@ import NewRestaurantForm from './NewRestaurantForm';
 import RestaurantList from './RestaurantList';
 
 export default class RestaurantListPage extends Component {
-  state = { restaurantNames: [] };
+  state = {
+    restaurantNames: [],
+    showRestaurantForm: false,
+  };
 
   handeleAddRestaurant = (newRestaurantName) => {
     this.setState(state => ({
@@ -11,21 +14,25 @@ export default class RestaurantListPage extends Component {
         newRestaurantName,
         ...state.restaurantNames,
       ],
+      showRestaurantForm: false,
     }));
   }
 
+  handleShowNewRestaurantForm = () => {
+    this.setState({ showRestaurantForm: true });
+  }
+
   render() {
-    const { restaurantNames } = this.state;
+    const { restaurantNames, showRestaurantForm } = this.state;
     return (
       <div>
         <button
           data-test="addRestaurantButton"
+          onClick={this.handleShowNewRestaurantForm}
         >
           Add Restaurant
         </button>
-        <NewRestaurantForm
-          onSave={this.handeleAddRestaurant}
-        />
+        { showRestaurantForm && <NewRestaurantForm onSave={this.handeleAddRestaurant} /> }
         <RestaurantList restaurants={restaurantNames} />
       </div>
     );
